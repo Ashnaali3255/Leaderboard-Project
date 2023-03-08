@@ -21,7 +21,7 @@
 <!-- PROJECT DESCRIPTION -->
 
 # 📖 [Leaderboard List] <a name="About-leaderboard-list"></a>
-Create a Project, which can help to easy explorate profiles for Mobile & Desktop Version and also add ES6 module directory and more features like: (Leaderboard list).
+Create a Project, which can help to easy explorate profiles for Mobile & Desktop Version and also add ES6 module directory and more features like: (Leaderboard list). "Leaderboard" is a project aimed at facilitating the testing and learning of API implementation in various projects.
 
 ## 🛠 Built With <a name="built-with">
 #Tech Stack

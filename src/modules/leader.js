@@ -1,33 +1,31 @@
-const form = document.querySelector('.form-cont');
-const refreshBtn = document.getElementById('refresh-btn');
-const table = document.getElementById('table');
-
 const url = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/';
-const getScores = async () => {
-  const response = await fetch(`${url}`);
+
+// Get the game Id
+export const getId = async () => {
+  const fetchId = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'content-Type': 'application/json; charset=UTF-8',
+    },
+    body: JSON.stringify({
+      name: 'new game for me',
+    }),
+  });
+  const id = await fetchId.json();
+  return id.result.split(' ')[3];
+};
+
+// get the scores
+export const getScores = async (id) => {
+  console.log('my id', id);
+  const response = await fetch(`${url}${id}/scores/`);
   const data = await response.json();
   return data;
 };
 
-const refresh = () => {
-  table.innerHTML = '';
-  const gamers = [];
-  getScores().then((entry) => {
-    Object.entries(entry.result).forEach(([, value]) => {
-      gamers.push(JSON.stringify(value));
-      const listItems = document.createElement('tr');
-      listItems.className = 'listItems';
-      listItems.innerHTML = `
-                    <td>${value.user}</td>
-                    <td>${value.score}</td>
-           `;
-      table.appendChild(listItems);
-    });
-  });
-};
-
-const add = async (newScore) => {
-  const response = await fetch(`${url}`, {
+// add score
+export const add = async (newScore, id) => {
+  const response = await fetch(`${url}${id}/scores/`, {
     method: 'POST',
     headers: {
       'content-Type': 'application/json',
@@ -35,27 +33,7 @@ const add = async (newScore) => {
     body: JSON.stringify(newScore),
   });
   const data = await response.json();
-  refresh();
   return data;
 };
 
-const create = () => {
-  const newScore = {
-    user: document.getElementById('name').value,
-    score: document.getElementById('score').value,
-  };
-  document.getElementById('name').value = '';
-  document.getElementById('score').value = '';
-  add(newScore);
-};
-
-refresh();
-
-refreshBtn.addEventListener('click', () => {
-  refresh();
-});
-
-form.addEventListener('submit', (event) => {
-  event.preventDefault();
-  create();
-});
+export default { getId, add, getScores };

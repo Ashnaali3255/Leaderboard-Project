@@ -17,7 +17,6 @@ export const getId = async () => {
 
 // get the scores
 export const getScores = async (id) => {
-  console.log('my id', id);
   const response = await fetch(`${url}${id}/scores/`);
   const data = await response.json();
   return data;

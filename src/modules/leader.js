@@ -1,30 +1,15 @@
-const url = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/';
-
-// Get the game Id
-export const getId = async () => {
-  const fetchId = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'content-Type': 'application/json; charset=UTF-8',
-    },
-    body: JSON.stringify({
-      name: 'new game for me',
-    }),
-  });
-  const id = await fetchId.json();
-  return id.result.split(' ')[3];
-};
+const url = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/bQNCbQ7GSatHf8dhQAB8/scores';
 
 // get the scores
-export const getScores = async (id) => {
-  const response = await fetch(`${url}${id}/scores/`);
+export const getScores = async () => {
+  const response = await fetch(`${url}`);
   const data = await response.json();
   return data;
 };
 
 // add score
-export const add = async (newScore, id) => {
-  const response = await fetch(`${url}${id}/scores/`, {
+export const add = async (newScore) => {
+  const response = await fetch(`${url}`, {
     method: 'POST',
     headers: {
       'content-Type': 'application/json',
@@ -35,4 +20,4 @@ export const add = async (newScore, id) => {
   return data;
 };
 
-export default { getId, add, getScores };
+export default { add, getScores };

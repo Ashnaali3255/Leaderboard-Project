@@ -1,10 +1,8 @@
-// import { AsyncDependenciesBlock } from "webpack";
-
 const form = document.querySelector('.form-cont');
 const refreshBtn = document.getElementById('refresh-btn');
 const table = document.getElementById('table');
 
-const url = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/';
+const url = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/';
 const getScores = async () => {
   const response = await fetch(`${url}`);
   const data = await response.json();
